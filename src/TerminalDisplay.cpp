@@ -3371,12 +3371,12 @@ void TerminalDisplay::dropEvent(QDropEvent* event)
                             QAction* cdAction = new QAction(i18n("Change &Directory To"), this);
                             if (fileInfo.isFile()){
                                 QString pattern = fileInfo.fileName();
-                                QString regex = pattern.append(QLatin1String(".*$")); // Regex for removing the file name from the path.
+                                QString regex = pattern.append(QLatin1String("'* *$")); // Regex for removing the file name from the path.
                                 dropText.replace(QRegExp(regex), QLatin1String(""));  // Remove the file name from the path
                                 if (dropText.at(0) == QLatin1String("'")){  // dropText detect white spases and wraps the path in ''. 
                                     dropText = QLatin1String(" cd ") + dropText.append(QLatin1String("'")) + QLatin1Char('\n'); // Prepere the Change Directory command.
                                 } else {
-                                    dropText = QLatin1String(" cd ") + QLatin1Char('\n'); // Prepere the Change Directory command.
+                                    dropText = QLatin1String(" cd ") + dropText + QLatin1Char('\n'); // Prepere the Change Directory command.
                                 }
                         } else {
                                 dropText = QLatin1String(" cd ") + dropText + QLatin1Char('\n');
